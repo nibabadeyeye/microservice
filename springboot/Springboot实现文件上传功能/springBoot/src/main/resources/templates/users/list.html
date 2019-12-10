@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="base/header :: header">...</div>
+<!--<h3 th:text="${userModel.title}">Welcome to springboot</h3>-->
+<div>
+    <a href="/users/form.html" th:href="@{/form}">创建用户</a>
+    <!--<a th:href="@{/users/form}" >创建用户</a>-->
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Age</td>
+        <td>Name</td>
+        <td colspan="2" align="center">操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${userModel.userList.size()} eq 0">
+        <td colspan="3">没有用户信息！！</td>
+    </tr>
+    <tr th:each="user : ${userModel.userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.name}"></td>
+        <!--<td><a href="view.html" th:href="@{'/users/' + ${user.id}}" th:text="${user.name}">删除</a></td>-->
+
+
+        <!--<td><a href="view.html" th:href="@{'/one?id='+${user.id}}">修改</a></td>-->
+        <td><a href="view.html"   th:href="@{'/one?id='+${user.id}}">修改</a></td>
+        <td><a href="vierrw.html" th:href="@{'/delete?id='+${user.id}}">删除</a></td>
+        <!--<td><a href="/delete/id="+"+${user.id}">删除</a></td>-->
+
+    </tbody>
+
+</table>
+
+<!--<div th:replace="~{base/footer :: footer}">...</div>-->
+</body>
+</html>

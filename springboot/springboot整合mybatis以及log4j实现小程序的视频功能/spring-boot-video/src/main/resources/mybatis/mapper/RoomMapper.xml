@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gpdi.web.video.mapper.RoomMapper">
+    <!--查询提出申请，查询当前专家的房间数: 小于3代表可以创建房间，否则的话不能创建房间-->
+    <select id="getRoomNumberByNatureId" parameterType="String" resultType="Integer">
+         select count(*) from room where natureId=#{0}
+    </select>
+
+    <!--用户离开房间，当前房间销毁-->
+    <delete id="delRoomByUserId" parameterType="com.gpdi.web.video.entity.RoomUtil">
+        delete from room where roomId=#{roomId} and uid=#{userId}
+    </delete>
+
+    <!--查询排队人员-->
+    <select id="getRoomByNature" parameterType="String" resultType="com.gpdi.web.video.entity.Room">
+        select * from room where natureId=#{0} and flag=0 limit 1;
+    </select>
+    <!--用户创建一个房间-->
+    <insert id="userCreateRoom" parameterType="com.gpdi.web.video.entity.Room">
+        insert into room values(null,#{roomId},#{password},#{uid},#{natureId},#{flag})
+    </insert>
+
+
+    <!--查询创建房间的所有房间号-->
+    <select id="getAllRoomByNatureId" parameterType="String" resultType="com.gpdi.web.video.entity.Room">
+         select * from room where natureId=#{0}
+    </select>
+
+    <!--修改正在视频的人员状态-->
+    <select id="updateRoomFlag" parameterType="Integer">
+         update room set flag=1 where id=#{0}
+    </select>
+
+
+    <!--查询当前是否有人员等待专家进入下一视频-->
+    <select id="getWaitNaturePeople" parameterType="String" resultType="Integer">
+        select count(*) from room where natureId=#{0} and flag!=1
+    </select>
+
+
+    <!--查询当前房间是否已经创建-->
+    <select id="judgeRoomHasCreate" parameterType="String" resultType="Integer">
+        ${value}
+    </select>
+
+
+    <!--删除之前的房间-->
+    <delete id="delHistoryRoom" parameterType="String">
+        ${value}
+    </delete>
+
+    <!--查询当前第一个专家-->
+    <select id="getFirstNatureId" resultType="String">
+       select uid from nature limit 1;
+    </select>
+
+    <!--获取所有的专家信息-->
+    <select id="getAllNatureList" resultType="com.gpdi.web.video.entity.Nature">
+        select * from nature;
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tFXWwicTdE3zstSh0e7ubLpInPxDlMXT"></script>
+</head>
+<body>
+<div id="allmap">
+ 展示map信息
+</div>
+<!--<div id="site_map" data-role="view" data-title="站址信息">-->
+    <!--<header data-role="header">-->
+        <!--<div data-role="navbar">-->
+            <!--<a data-role="backbutton" data-align="left" class="btn-back"></a>-->
+            <!--<a data-role="button" data-align="right" class="btn-refresh">刷新</a>-->
+            <!--<span data-role="view-title">xx</span>-->
+        <!--</div>-->
+    <!--</header>-->
+    <!--<div id="allmap"></div>-->
+    <!--<div id="actionsheet" class="mui-popover mui-popover-action mui-popover-bottom">-->
+        <!--<div class="ops">此处站址列表<a href="javascript:;" class="btn-close">X</a></div>-->
+        <!--<ul class="mui-table-view">-->
+
+        <!--</ul>-->
+    <!--</div>-->
+<!--</div>-->
+</body>
+</html>
+<script type="text/javascript">
+       alert('123312');
+    var map = new BMap.Map("allmap");
+
+    var point = new BMap.Point(116.400244,39.92556);
+
+    map.centerAndZoom(point, 12);
+
+    var marker = new BMap.Marker(point);  // 创建标注
+
+    map.addOverlay(marker);              // 将标注添加到地图中
+
+    marker.addEventListener("click",getAttr);
+
+    function getAttr()
+    {
+
+        var p = marker.getPosition();       //获取marker的位置
+    }
+</script>

@@ -1,0 +1,11 @@
+spring:
+  #配置中心
+  #cloud:
+    #config:
+      #uri:
+      #profile: @env@
+      #label: master
+      #name: job-servcie
+  application:
+    name: job-servcie
+

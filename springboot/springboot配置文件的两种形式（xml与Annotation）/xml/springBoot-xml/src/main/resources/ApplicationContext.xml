@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+">
+<!--
+      1、Spring 的编程是已Bean作为核心，
+      2、Bean又是有Spring的容器进行管理，
+      3、我们如果需要使用Beaan ,我们必须在容器里面注册Bean
+
+      1、Spring 是怎么样注册一个Bean?（注册的流程是怎么样的，怎么包装成BeanDefinition）
+
+      2、如何扩展xml
+
+      3、xmlApplicationContext 的理解
+
+      4、 BeanDefinitionz中上下文中生命周期又是什么？（从上下文中获取Bean的原理）
+
+      5、beandifittion是否包含 ApplicationContext？
+
+      6.Bean 之前的依赖关系BeanDefinition是怎么定义的？
+
+-->
+
+</beans>

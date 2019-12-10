@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>关键字查询自我展示</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/AMap.PlaceSearchRender1120.css"/>
+    <style>
+        #panel {
+            z-index: 999;
+            position: absolute;
+            background-color: white;
+            max-height: 100%;
+            overflow-y: auto;
+            right: 0;
+            width: 280px;
+        }
+    </style>
+    <script type="text/javascript"  src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=e2e274f08afba14bfdab5b4467990a86&plugin=AMap.PlaceSearch"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/PlaceSearchRender.js"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+</head>
+<body>
+<div id="container"></div>
+
+<div id="panel"></div>
+
+
+<!--事件绑定-->
+<div class="info" id="text">
+    请用鼠标在地图上操作试试
+</div>
+<div class="input-card" style="width:16rem">
+    <h4>地图点击相关事件</h4>
+    <div>
+      <div class="input-item">
+        <button id="clickOn" class="btn" style="margin-right:1rem;">绑定事件</button>
+        <button id="clickOff" class="btn">解绑事件</button>
+      </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var myArr = new Array()
+    getData();
+    function getData() {
+        $.ajax({
+            url:"http://localhost:8081/getPoint",
+            type:"get",
+            dataType:"json",
+            async:false,
+            data:{},
+            success:function(data)
+            {
+              //  alert("111")
+                myArr=data;
+              ///  alert(myArr.length+"  "+myArr[1].longitude+"  "+myArr[1].latitude);
+
+                // for(var i=0;i<length;i++)
+                // {
+                //     alert(data[i].name)
+                // }
+                //  alert(data[0].name+data[0].latitude+data[0].longitude);
+            }
+        });
+    }
+
+
+    var map = new AMap.Map("container", {resizeEnable: true});
+    var placeSearch = new AMap.PlaceSearch({
+        // city 指定搜索所在城市，支持传入格式有：城市名、citycode和adcode
+        city: '021'
+        //可以传入多种类型的数据，我们可以传入我们的后台数据进行描点
+          // $({})
+    })
+
+    placeSearch.search('佛上地区的数据点', function (status, result) {
+     //   alert("222");
+        // 查询成功时，result即对应匹配的POI信息
+      //  alert(result);
+     // alert(myArr);
+        // for(var i=0;i<myArr.length;i++)
+        // {
+        //    // alert("kkkk")
+        //     var Arr=myArr[i];
+        //     var marker = [];
+        //     marker[i] = new AMap.Marker({
+        //         position: [Arr.longitude,Arr.latitude],
+        //        // position: [112.97476,22.954678],
+        //         // position: poi.location,   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+        //         title: Arr.name
+        //     });
+        //     // 将创建的点标记添加到已有的地图实例：
+        //     map.add(marker[i]);
+        // }
+        //循环列表开始000000000000000000000
+        var pois = result.poiList.pois;
+        for(var i = 0; i < myArr.length; i++){
+
+            var poi = myArr[i];
+         //   alert(poi)
+            var marker = [];
+            marker[i] = new AMap.Marker({
+                position: [myArr[i].longitude,myArr[i].latitude],
+            //    position: [112.97476,22.954678],
+                // position: poi.location,   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+                title: poi.name
+            });
+            // 将创建的点标记添加到已有的地图实例：
+            map.add(marker[i]);
+
+        }
+        map.setFitView();
+        //循环列表开始000000000000000000000
+        //为地图添加一个点击事件开始（很奇怪，标注的点不能点击）
+        // map.on('click', function(e) {
+        //     alert(e.lnglat.getLng() + ',' + e.lnglat.getLat());
+        //   //  document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+        // });
+        // var auto = new AMap.Autocomplete({
+        //     input: "tipinput"
+        // });
+        // AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+        // function select(e) {
+        //     if (e.poi && e.poi.location) {
+        //         map.setZoom(15);
+        //         map.setCenter(e.poi.location);
+        //     }
+        // }
+        //为地图添加一个点击事件开始（很奇怪，标注的点不能点击）
+
+       // clickOn();
+        function clickOn(){
+            log.success("绑定事件!");
+            map.on('click', showInfoClick);
+         //   map.on('dblclick', showInfoDbClick);
+           // map.on('mousemove', showInfoMove);
+        }
+        function showInfoClick(e){
+            var text = '您在 [ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ] 的位置单击了地图！'
+            document.querySelector("#text").innerText = text;
+        }
+        document.getElementById("clickOn").onclick = clickOn;
+    })
+
+</script>
+</body>
+</html>

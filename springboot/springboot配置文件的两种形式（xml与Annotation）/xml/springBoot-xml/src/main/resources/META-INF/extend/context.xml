@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:whsDubbo="http://gupaoedu.com/schema/whsDubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://gupaoedu.com/schema/whsDubbo
+        http://gupaoedu.com/schema/whsDubbo.xsd
+">
+
+
+    <context:property-placeholder location="classpath:application.properties" file-encoding="GBK" />
+    <whsDubbo:user bean-name="user1" uid="1" uname="胡六"  upassword="11"/>
+    <whsDubbo:user bean-name="user2" uid="2" uname="小马哥"  upassword="22"/>
+</beans>

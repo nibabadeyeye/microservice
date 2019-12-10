@@ -1,0 +1,1 @@
+当前ElasticSearch的版本为5.6.14

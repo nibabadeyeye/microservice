@@ -1,0 +1,149 @@
+1.java 体系的介绍
+ 
+      六大专题：
+
+              1、分布式
+                    
+                        1、分布式服务的演进过程
+
+                        
+                        2、RMI原理分析
+                               
+
+                       
+                        3、RPC 框架的分析
+                         
+                              spring cloud 和 dubbo 
+
+ ---------------------------------------------------------------------------            
+
+              2、微服务 （分布式属于微服务，他们是包含关系）
+                
+                       基于 Eureka 的实现
+
+                              1、 服务的注册与发现（Regiestry and Discover） 
+                                 
+                              2、 节点的负载均衡（loadbalance）
+
+                                   IRule                                         
+                                         随机规则：RandomRule
+
+                                         最可用规则：BestAvailableRule
+
+                                         轮训规则：RoundRobinRule
+
+                                         重试实现：RetryRule
+
+                                         客户端配置：ClientConfigEnabledRoundRobinRule
+
+                                         可用性过滤规则：AvailabilityFilteringRule
+
+                                         RT权重规则：WeightedResponseTimeRule
+
+                                         规避区域规则：ZoneAvoidanceRule
+
+                                     
+                              3、 RestTemplate 的轮训实现原理  
+
+                              4、 RestTemplate   的整合  Netflix Ribbon
+                              
+                              5、 接口统一管理 @FeignClient（整合了负载均衡）
+
+                              6、 实现服务熔断（Future）
+                                            
+                                          Hystrix 
+
+                              7、  服务网关（zuul）
+
+                                
+               
+
+                       基于 Zookeeper的实现
+-----------------------------------------------------------------------
+              
+              3、并发编程
+                           浅析 jvm 和 jmm
+                           
+                           线程关键字的使用及其实现原理：
+                            
+                                                      深入分析ThreadLocal
+
+                                                      深入分析synchronized的实现原理
+
+                                                      深入分析volatile的实现原理
+
+                                                      Java内存模型之happens-before
+
+                                                      Java内存模型之重排序
+
+                                                      Java内存模型之分析volatile
+
+                                                      Java内存模型之总结
+
+                                                      J.U.C之AQS简介
+
+                                                      J.U.C之AQS：CLH同步队列
+
+                                                      J.U.C之AQS同步状态的获取与释放
+ 
+                                                      J.U.C之AQS阻塞和唤醒线程
+
+                                                      J.U.C之重入锁：ReentrantLock
+
+                                                      J.U.C之读写锁：ReentrantReadWriteLock
+
+                                                      J.U.C之Condition
+
+                                                      J.U.C之并发工具类：CyclicBarrier
+
+                                                      J.U.C之并发工具类：Semaphore
+
+                                                      J.U.C之并发工具类：CountDownLatch
+
+                                                      J.U.C之并发工具类：Exchanger
+
+                                                      J.U.C之阻塞队列：ArrayBlockingQueue
+
+                                                      J.U.C之Java并发容器：ConcurrentSkipListMap
+
+                                                      J.U.C之ConcurrentHashMap红黑树转换分析
+                                            
+
+-----------------------------------------------------------------------
+              
+              4、性能优化
+                           mysql
+                     
+                           jvm
+                           
+                           Tomcat
+                           
+                           分库分表
+-----------------------------------------------------------------------
+
+
+              
+              5、团队协作
+                         git 的使用
+                        
+                         maven 插件的管理
+-----------------------------------------------------------------------
+
+ 
+              6、源码分析
+
+                   Spring 源码分析
+      
+                   MyBatis原理分析及其应用
+              
+                   常用的23种设计模式（应用场景）
+                             
+                          创建：
+
+                          结构：
+
+                          行为：
+                          
+------------------------------------------------------------------------
+
+
