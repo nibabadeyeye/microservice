@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gpdi.dao.item.ItemMapper">
+
+    <!--根据日期当天的充电电流信息-->
+    <select id="getRechargeCurrentByDateByDate" parameterType="String" resultType="com.gpdi.entity.item.Item">
+        select
+             upload_time as date,
+             current as value
+        from battery_info
+        where imei=#{imei} and SUBSTRING(upload_time,1,10)=#{date} and state=2;
+</select>
+
+    <!--根据日期当天的充电电压信息-->
+    <select id="getRechargeVoltageByDate" resultType="com.gpdi.entity.item.Item">
+       select
+                  upload_time as date,
+                 (voltage_value_1+voltage_value_2+voltage_value_3+voltage_value_4+voltage_value_5+
+                  voltage_value_6+voltage_value_7+voltage_value_8+voltage_value_9+voltage_value_10+
+                  voltage_value_11+voltage_value_12+voltage_value_13
+                  )/13 as value
+       from battery_info
+       where imei=#{imei} and SUBSTRING(upload_time,1,10)=#{date} and state=2;
+    </select>
+    <!--根据日期当天的电阻信息-->
+    <select id="getRechargeTemperatureByDate" parameterType="String" resultType="com.gpdi.entity.item.Item">
+          select
+              upload_time as date,
+             (resistance_temperature_1+resistance_temperature_2+resistance_temperature_3)/3  as value
+          from battery_info
+          where imei=#{imei} and SUBSTRING(upload_time,1,10)=#{date} and state=2;
+
+    </select>
+
+    <!--查询最大的充电天数-->
+    <select id="getMaxRechargeDateFromIMEI" parameterType="String" resultType="String">
+        SELECT
+               max(SUBSTRING(upload_time,1,10)) as date,imei
+        FROM `battery_info`
+        where imei=#{0} and state=2
+    </select>
+</mapper>

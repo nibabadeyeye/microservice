@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gpdi.dao.expert.ExpertMapper">
+
+    <!--根据串号查询所有的经纬度信息-->
+    <select id="getAllCoordinateByIMEI" parameterType="String" resultType="com.gpdi.entity.expect.Coordinates">
+        select
+                     SUBSTRING(coordinate,1,12)  as latitude , SUBSTRING(coordinate,15,12) as longitude
+        from battery_info
+
+        where coordinate!='0E-9N,0E-9E' and imei=#{0}
+
+        order by upload_time asc
+    </select>
+
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gpdi.dao.battery.BatteryInfoMapper">
+
+    <insert id="insertBatteryList" parameterType="List">
+        insert  into battery_info  values
+        <foreach collection="list" item="poi" index="index" separator="," >
+            (null,
+            #{poi.recordNumber},
+            #{poi.productDate},
+            #{poi.capacity},
+            #{poi.state},
+            #{poi.powerValue},
+            #{poi.model},
+            #{poi.imei},
+            #{poi.deviceType},
+            #{poi.residualPercentage},
+            #{poi.coordinate},
+            #{poi.workPattern},
+            #{poi.cmd},
+            #{poi.number},
+            #{poi.voltageValue1},
+            #{poi.voltageValue2},
+            #{poi.voltageValue3},
+            #{poi.voltageValue4},
+            #{poi.voltageValue5},
+            #{poi.voltageValue6},
+            #{poi.voltageValue7},
+            #{poi.voltageValue8},
+            #{poi.voltageValue9},
+            #{poi.voltageValue10},
+            #{poi.voltageValue11},
+            #{poi.voltageValue12},
+            #{poi.voltageValue13},
+            #{poi.current},
+            #{poi.resistanceTemperature1},
+            #{poi.resistanceTemperature2},
+            #{poi.resistanceTemperature3},
+            #{poi.serverTag},
+            #{poi.tag},
+            #{poi.hostInfo},
+            #{poi.response},
+            #{poi.uploadTime},
+            #{poi.writeTime})
+        </foreach>
+    </insert>
+
+    <!--根据电池的编号进行登录-->
+    <select id="appLoginByBatteryIMEI" parameterType="String" resultType="Integer">
+        select count(*) from battery_info where imei=#{0}
+    </select>
+    <!--根据串号查询电池的相关信息-->
+    <select id="getBatteryInfoByTimeAndIMEI" resultType="com.gpdi.entity.battery.BatteryInfo">
+        select * from battery_info where upload_time=#{date} and imei=#{imei} limit 1
+    </select>
+
+    <!--根据串号查询电池的相关信息-->
+    <select id="getBatteryInfoId" parameterType="String" resultType="com.gpdi.entity.battery.BatteryInfo">
+        select
+              id,  max(upload_time)  as uploadTime
+        from battery_info
+        where     imei=#{0}
+    </select>
+
+    <select id="getBatteryInfoByRecentDays" parameterType="String" resultType="com.gpdi.entity.battery.BatteryInfo">
+        select
+                record_number
+        from    battery_info
+        where
+                upload_time>=#{0}
+
+    </select>
+</mapper>

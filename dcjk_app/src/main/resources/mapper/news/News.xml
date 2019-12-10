@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gpdi.dao.news.NewsMapper">
+    <!--增加资讯-->
+    <insert id="addNews" parameterType="com.gpdi.entity.news.News">
+        insert into news value(null,#{title},#{content},#{operationTime},#{state},#{operater})
+    </insert>
+
+    <!--删除资讯-->
+    <delete id="delNewById" parameterType="Integer">
+       delete from news where id=${0}
+     </delete>
+
+
+    <!--推送-->
+    <update id="pushNewsById" parameterType="Integer">
+        update news set state=1 where id=#{0}
+    </update>
+
+    <!--分页查询资讯信息-->
+    <select id="getNewsListByCondition" resultType="com.gpdi.entity.news.News">
+        select * from news limit #{page},#{limit}
+    </select>
+
+    <!--统计资讯的数量-->
+    <select id="countNews" resultType="Integer">
+        select cont(*) from news
+    </select>
+
+</mapper>
